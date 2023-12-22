@@ -17,12 +17,13 @@ for (let i = 0; i < 8; i++) {
 
 console.log(board);
 
-for (let i = 0; i < 8; i++) {
+for (let i = 1; i < 9; i++) {
 
-    for (let j = 0; j < 8; j++) {
+    for (let j = 1; j < 9; j++) {
 
         const my_box = document.createElement("div");
         my_box.classList.add("square");
+        my_box.setAttribute("id", [9 - i, j]);
 
         if ((i + j) % 2 != 0) {
             my_box.classList.add("bg-dark");
