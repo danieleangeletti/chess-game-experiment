@@ -15,4 +15,5 @@ body {
 .square {
     width: calc(600px / 8);
     height: calc(600px / 8);
+    cursor: pointer;
 }
