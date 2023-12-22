@@ -1,3 +1,5 @@
+// CREAZIONE SCACCHIERA
+
 const my_chess_container = document.getElementById("chess-container");
 
 const board = [];
@@ -36,6 +38,8 @@ for (let i = 0; i < 8; i++) {
 
 }
 
+// AGGIUNTA PEZZI
+
 const my_box = document.querySelectorAll(".square");
 
 my_box[0].innerHTML = `<img class="w-100 h-100" src="./img/red-rook.png" alt=""></img>`;
@@ -65,5 +69,7 @@ for (let i = 8; i < 16; i++) {
 for (let i = 48; i < 56; i++) {
     my_box[i].innerHTML = `<img class="w-100 h-100" src="./img/yellow-pawn.png" alt=""></img>`;
 }
+
+
 
 

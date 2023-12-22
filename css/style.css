@@ -4,16 +4,28 @@ body {
 }
 
 .big-font {
-    font-size: 4em;
+    font-size: 3em;
 }
 
 #chess-container {
-    width: 600px;
-    height: 600px;
+    width: 570px;
+    height: 570px;
 }
 
 .square {
-    width: calc(600px / 8);
-    height: calc(600px / 8);
+    width: calc(570px / 8);
+    height: calc(570px / 8);
     cursor: pointer;
+}
+
+/* #letter-container {
+    width: 580px;
+} */
+
+.letter-box {
+    width: calc(580px / 8);
+}
+
+.number-box {
+    height: calc(580px / 8);
 }
