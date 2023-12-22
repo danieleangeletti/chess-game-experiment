@@ -1,0 +1,18 @@
+body {
+    background-image: url("https://www.psicologiacontemporanea.it/media/filer_public_thumbnails/filer_public/d0/97/d09726dd-e59e-4310-a6b2-01ced4d1158c/scacchi.jpg__4928x3264_q85_crop_subject_location-2464%2C1631_subsampling-2_upscale.jpg");
+    background-size: cover;
+}
+
+.big-font {
+    font-size: 4em;
+}
+
+#chess-container {
+    width: 600px;
+    height: 600px;
+}
+
+.square {
+    width: calc(600px / 8);
+    height: calc(600px / 8);
+}
