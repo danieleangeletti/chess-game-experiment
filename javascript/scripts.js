@@ -148,6 +148,11 @@ for (let i = 0; i < board.length; i++) {
             else {
 
                 if ((active == true) && is_empty(clicked_box)) {
+                    move(active_box, clicked_box);
+
+                    // Muovi l'immagine
+                    
+
                     console.log("Disattivando: ", active_box);
                     active = false;
                     active_box = null;
@@ -161,10 +166,55 @@ for (let i = 0; i < board.length; i++) {
 
 // FUNCTIONS
 
-// function is_empty(x, y) {
-//     return board[x][y].piece == "";
-// }
-
 function is_empty(box) {
     return box.piece == "";
+}
+
+function move(box, destination) {
+    // Muove la casella `box` verso la destinazione `destination`.
+    switch (box.piece) {
+        case "pawn":
+            // move pawn
+            if ((box.y == destination.y) && (destination.x == box.x + 1)) {
+                board[destination.x][destination.y] = {
+                    x: destination.x,
+                    y: destination.y,
+                    piece: box.piece,
+                    player: box.player,
+                };
+
+                board[box.x][box.y] = {
+                    x: box.x,
+                    y: box.y,
+                    piece: "",
+                    player: -1,
+                };
+            } else {
+                alert("invalid move!");
+            }
+            break;
+
+        case "rook":
+            // move rook
+            break;
+
+        case "knight":
+            // move knight
+            break;
+
+        case "bishop":
+            // move bishop
+            break;
+
+        case "king":
+            // move king
+            break;
+
+        case "queen":
+            // move queen
+            break;
+
+        default:
+            alert("invalid piece");
+    }
 }
