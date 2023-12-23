@@ -10,20 +10,25 @@ for (let i = 0; i < 8; i++) {
 
     for (let j = 0; j < 8; j++) {
 
-        board[i].push(j);
+        board[i].push({
+            x: i,
+            y: j,
+            piece: "",
+            player: -1,
+        });
     }
 
 }
 
 console.log(board);
 
-for (let i = 1; i < 9; i++) {
+for (let i = 0; i < board.length; i++) {
 
-    for (let j = 1; j < 9; j++) {
+    for (let j = 0; j < board[i].length; j++) {
 
         const my_box = document.createElement("div");
         my_box.classList.add("square");
-        my_box.setAttribute("id", [9 - i, j]);
+        my_box.setAttribute("id", [7 - i, j]);
 
         if ((i + j) % 2 != 0) {
             my_box.classList.add("bg-dark");
@@ -35,40 +40,117 @@ for (let i = 1; i < 9; i++) {
 
         my_chess_container.append(my_box);
 
-        }
+    }
 
 }
 
 // AGGIUNTA PEZZI
 
-document.getElementById("8,1").innerHTML = `<img class="w-100 h-100" src="./img/red-rook.png" alt=""></img>`;
-document.getElementById("8,8").innerHTML = `<img class="w-100 h-100" src="./img/red-rook.png" alt=""></img>`;
-document.getElementById("1,1").innerHTML = `<img class="w-100 h-100" src="./img/yellow-rook.png" alt=""></img>`;
-document.getElementById("1,8").innerHTML = `<img class="w-100 h-100" src="./img/yellow-rook.png" alt=""></img>`;
+document.getElementById("7,0").innerHTML = `<img class="w-100 h-100" src="./img/red-rook.png" alt=""></img>`;
+board[7][0].piece = "rook";
+board[7][0].player = 1;
 
-document.getElementById("8,2").innerHTML = `<img class="w-100 h-100" src="./img/red-knight.png" alt=""></img>`;
-document.getElementById("8,7").innerHTML = `<img class="w-100 h-100" src="./img/red-knight.png" alt=""></img>`;
-document.getElementById("1,2").innerHTML = `<img class="w-100 h-100" src="./img/yellow-knight.png" alt=""></img>`;
-document.getElementById("1,7").innerHTML = `<img class="w-100 h-100" src="./img/yellow-knight.png" alt=""></img>`;
+document.getElementById("7,7").innerHTML = `<img class="w-100 h-100" src="./img/red-rook.png" alt=""></img>`;
+board[7][7].piece = "rook";
+board[7][7].player = 1;
 
-document.getElementById("8,3").innerHTML = `<img class="w-100 h-100" src="./img/red-bishop.png" alt=""></img>`;
-document.getElementById("8,6").innerHTML = `<img class="w-100 h-100" src="./img/red-bishop.png" alt=""></img>`;
-document.getElementById("1,3").innerHTML = `<img class="w-100 h-100" src="./img/yellow-bishop.png" alt=""></img>`;
-document.getElementById("1,6").innerHTML = `<img class="w-100 h-100" src="./img/yellow-bishop.png" alt=""></img>`;
+document.getElementById("0,0").innerHTML = `<img class="w-100 h-100" src="./img/yellow-rook.png" alt=""></img>`;
+board[0][0].piece = "rook";
+board[0][0].player = 0;
 
-document.getElementById("8,4").innerHTML = `<img class="w-100 h-100" src="./img/red-queen.png" alt=""></img>`;
-document.getElementById("8,5").innerHTML = `<img class="w-100 h-100" src="./img/red-king.png" alt=""></img>`;
-document.getElementById("1,4").innerHTML = `<img class="w-100 h-100" src="./img/yellow-queen.png" alt=""></img>`;
-document.getElementById("1,5").innerHTML = `<img class="w-100 h-100" src="./img/yellow-king.png" alt=""></img>`;
+document.getElementById("0,7").innerHTML = `<img class="w-100 h-100" src="./img/yellow-rook.png" alt=""></img>`;
+board[0][7].piece = "rook";
+board[0][7].player = 0;
 
-for (let i = 1; i < 9; i++) {
-    document.getElementById(`7,${i}`).innerHTML = `<img class="w-100 h-100" src="./img/red-pawn.png" alt=""></img>`;
+document.getElementById("7,1").innerHTML = `<img class="w-100 h-100" src="./img/red-knight.png" alt=""></img>`;
+board[7][1].piece = "knight";
+board[7][1].player = 1;
+
+document.getElementById("7,6").innerHTML = `<img class="w-100 h-100" src="./img/red-knight.png" alt=""></img>`;
+board[7][6].piece = "knight";
+board[7][6].player = 1;
+
+document.getElementById("0,1").innerHTML = `<img class="w-100 h-100" src="./img/yellow-knight.png" alt=""></img>`;
+board[0][1].piece = "knight";
+board[0][1].player = 0;
+
+document.getElementById("0,6").innerHTML = `<img class="w-100 h-100" src="./img/yellow-knight.png" alt=""></img>`;
+board[0][6].piece = "knight";
+board[0][6].player = 0;
+
+document.getElementById("7,2").innerHTML = `<img class="w-100 h-100" src="./img/red-bishop.png" alt=""></img>`;
+board[7][2].piece = "bishop";
+board[7][2].player = 1;
+
+document.getElementById("7,5").innerHTML = `<img class="w-100 h-100" src="./img/red-bishop.png" alt=""></img>`;
+board[7][5].piece = "bishop";
+board[7][5].player = 1;
+
+document.getElementById("0,2").innerHTML = `<img class="w-100 h-100" src="./img/yellow-bishop.png" alt=""></img>`;
+board[0][2].piece = "bishop";
+board[0][2].player = 0;
+
+document.getElementById("0,5").innerHTML = `<img class="w-100 h-100" src="./img/yellow-bishop.png" alt=""></img>`;
+board[0][5].piece = "bishop";
+board[0][5].player = 0;
+
+document.getElementById("7,3").innerHTML = `<img class="w-100 h-100" src="./img/red-queen.png" alt=""></img>`;
+board[7][3].piece = "queen";
+board[7][3].player = 1;
+
+document.getElementById("7,4").innerHTML = `<img class="w-100 h-100" src="./img/red-king.png" alt=""></img>`;
+board[7][4].piece = "king";
+board[7][4].player = 1;
+
+document.getElementById("0,3").innerHTML = `<img class="w-100 h-100" src="./img/yellow-queen.png" alt=""></img>`;
+board[0][3].piece = "queen";
+board[0][3].player = 0;
+
+document.getElementById("0,4").innerHTML = `<img class="w-100 h-100" src="./img/yellow-king.png" alt=""></img>`;
+board[0][4].piece = "king";
+board[0][4].player = 0;
+
+for (let i = 0; i < board[0].length; i++) {
+    document.getElementById(`6,${i}`).innerHTML = `<img class="w-100 h-100" src="./img/red-pawn.png" alt=""></img>`;
+    board[6][i].piece = "pawn";
+    board[6][i].player = 1;
 }
 
-for (let i = 1; i < 9; i++) {
-    document.getElementById(`2,${i}`).innerHTML = `<img class="w-100 h-100" src="./img/yellow-pawn.png" alt=""></img>`;
+for (let i = 0; i < board[0].length; i++) {
+    document.getElementById(`1,${i}`).innerHTML = `<img class="w-100 h-100" src="./img/yellow-pawn.png" alt=""></img>`;
+    board[1][i].piece = "pawn";
+    board[1][i].player = 0;
 }
 
+// GESTIONE CLICK
 
+let clicked = false;
 
+for (let i = 0; i < board.length; i++) {
 
+    for (let j = 0; j < board[i].length; j++) {
+
+        const my_box = document.getElementById(`${i},${j}`);
+
+        my_box.addEventListener("click", function() {
+            if (clicked == false) {
+                console.log("Ora l'elemento è cliccato");
+                console.log(is_empty(i, j));
+                clicked = true;
+            }
+
+            else {
+                console.log("Ora l'elemento non è cliccato");
+                clicked = false;
+            }
+        })
+
+    }
+
+}
+
+// FUNCTIONS
+
+function is_empty(x, y) {
+    return board[x][y].piece == "";
+}
