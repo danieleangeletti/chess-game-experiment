@@ -124,7 +124,10 @@ for (let i = 0; i < board[0].length; i++) {
 
 // GESTIONE CLICK
 
-let clicked = false;
+let active = false;
+let clicked_box = null;
+let active_box = null;
+let turn = 0;
 
 for (let i = 0; i < board.length; i++) {
 
@@ -133,15 +136,22 @@ for (let i = 0; i < board.length; i++) {
         const my_box = document.getElementById(`${i},${j}`);
 
         my_box.addEventListener("click", function() {
-            if (clicked == false) {
-                console.log("Ora l'elemento è cliccato");
-                console.log(is_empty(i, j));
-                clicked = true;
+
+            clicked_box = board[i][j];
+
+            if ((active == false) && (clicked_box.player == 0) && (turn == 0)) {
+                active_box = board[i][j];
+                active = true;
+                console.log("Attivando: ", active_box);
             }
 
             else {
-                console.log("Ora l'elemento non è cliccato");
-                clicked = false;
+
+                if ((active == true) && is_empty(clicked_box)) {
+                    console.log("Disattivando: ", active_box);
+                    active = false;
+                    active_box = null;
+                }
             }
         })
 
@@ -151,6 +161,10 @@ for (let i = 0; i < board.length; i++) {
 
 // FUNCTIONS
 
-function is_empty(x, y) {
-    return board[x][y].piece == "";
+// function is_empty(x, y) {
+//     return board[x][y].piece == "";
+// }
+
+function is_empty(box) {
+    return box.piece == "";
 }
