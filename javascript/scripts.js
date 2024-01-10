@@ -14,7 +14,7 @@ for (let i = 0; i < 8; i++) {
             x: i,
             y: j,
             piece: "",
-            player: -1,
+            player: -1
         });
     }
 
@@ -245,6 +245,23 @@ function move(box, destination) {
 
         case "bishop":
             // move bishop
+            if ((Math.abs(destination.x - box.x)) == (Math.abs(destination.y - box.y))){
+                board[destination.x][destination.y] = {
+                    x: destination.x,
+                    y: destination.y,
+                    piece: box.piece,
+                    player: box.player,
+                };
+
+                board[box.x][box.y] = {
+                    x: box.x,
+                    y: box.y,
+                    piece: "",
+                    player: -1,
+                };
+            } else {
+                alert("invalid move!");
+            }
             break;
 
         case "king":
