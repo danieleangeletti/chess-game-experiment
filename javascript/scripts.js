@@ -217,6 +217,30 @@ function move(box, destination) {
 
         case "knight":
             // move knight
+            if (((destination.x == box.x - 2) && (destination.y == box.y - 1)) ||
+            ((destination.x == box.x - 2) && (destination.y == box.y + 1)) ||
+            ((destination.x == box.x - 1) && (destination.y == box.y + 2)) ||
+            ((destination.x == box.x + 1) && (destination.y == box.y + 2)) ||
+            ((destination.x == box.x + 2) && (destination.y == box.y + 1)) ||
+            ((destination.x == box.x + 2) && (destination.y == box.y - 1)) ||
+            ((destination.x == box.x + 1) && (destination.y == box.y - 2)) ||
+            ((destination.x == box.x - 1) && (destination.y == box.y - 2))) {
+                board[destination.x][destination.y] = {
+                    x: destination.x,
+                    y: destination.y,
+                    piece: box.piece,
+                    player: box.player,
+                };
+
+                board[box.x][box.y] = {
+                    x: box.x,
+                    y: box.y,
+                    piece: "",
+                    player: -1,
+                };
+            } else {
+                alert("invalid move!");
+            }
             break;
 
         case "bishop":
