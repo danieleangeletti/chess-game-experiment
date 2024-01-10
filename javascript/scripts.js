@@ -150,8 +150,7 @@ for (let i = 0; i < board.length; i++) {
                 if ((active == true) && is_empty(clicked_box)) {
                     move(active_box, clicked_box);
 
-                    // Muovi l'immagine
-                    
+                    // MUOVI L'IMMAGINE
 
                     console.log("Disattivando: ", clicked_box);
                     active = false;
@@ -171,10 +170,10 @@ function is_empty(box) {
 }
 
 function move(box, destination) {
-    // Muove la casella `box` verso la destinazione `destination`.
+    // MUOVE LA CASELLA 'BOX' VERSO LA CASELLA 'DESTINATION'.
     switch (box.piece) {
         case "pawn":
-            // move pawn
+            // MOVE PAWN
             if ((destination.x == box.x + 1) && (box.y == destination.y)) {
                 board[destination.x][destination.y] = {
                     x: destination.x,
@@ -195,7 +194,7 @@ function move(box, destination) {
             break;
 
         case "rook":
-            // move rook
+            // MOVE ROOK
             if ((destination.x == box.x) || (destination.y == box.y)){
                 board[destination.x][destination.y] = {
                     x: destination.x,
@@ -216,7 +215,7 @@ function move(box, destination) {
             break;
 
         case "knight":
-            // move knight
+            // MOVE KNIGHT
             if (((destination.x == box.x - 2) && (destination.y == box.y - 1)) ||
             ((destination.x == box.x - 2) && (destination.y == box.y + 1)) ||
             ((destination.x == box.x - 1) && (destination.y == box.y + 2)) ||
@@ -244,7 +243,7 @@ function move(box, destination) {
             break;
 
         case "bishop":
-            // move bishop
+            // MOVE BISHOP
             if ((Math.abs(destination.x - box.x)) == (Math.abs(destination.y - box.y))){
                 board[destination.x][destination.y] = {
                     x: destination.x,
@@ -265,11 +264,35 @@ function move(box, destination) {
             break;
 
         case "king":
-            // move king
+            // MOVE KING
+            if (((destination.x == box.x - 1) && (destination.y == box.y)) ||
+            ((destination.x == box.x - 1) && (destination.y == box.y + 1)) ||
+            ((destination.x == box.x) && (destination.y == box.y + 1)) ||
+            ((destination.x == box.x + 1) && (destination.y == box.y + 1)) ||
+            ((destination.x == box.x + 1) && (destination.y == box.y)) ||
+            ((destination.x == box.x + 1) && (destination.y == box.y - 1)) ||
+            ((destination.x == box.x) && (destination.y == box.y - 1)) ||
+            ((destination.x == box.x - 1) && (destination.y == box.y - 1))){
+                board[destination.x][destination.y] = {
+                    x: destination.x,
+                    y: destination.y,
+                    piece: box.piece,
+                    player: box.player,
+                };
+
+                board[box.x][box.y] = {
+                    x: box.x,
+                    y: box.y,
+                    piece: "",
+                    player: -1,
+                };
+            } else {
+                alert("invalid move!");
+            }
             break;
 
         case "queen":
-            // move queen
+            // MOVE QUEEN
             if (((Math.abs(destination.x - box.x)) == (Math.abs(destination.y - box.y))) ||
             ((destination.x == box.x) || (destination.y == box.y))){
                 board[destination.x][destination.y] = {
