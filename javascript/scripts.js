@@ -9,11 +9,14 @@ for (let i = 0; i < 8; i++) {
     board.push([]);
 
     for (let j = 0; j < 8; j++) {
-
+        // CREAZIONE OGGETTO PER OGNI CASELLA
         board[i].push({
+            // COORDINATE X Y
             x: i,
             y: j,
+            // PEZZO CORRISPONDENTE ALLA CASELLA
             piece: "",
+            // PLAYER: -1 = CASELLA VUOTA; PLAYER: 0 = CASELLA CON PEZZO UTENTE; PLAYER: 1 = CASELLA CON PEZZO AVVERSARIO
             player: -1
         });
     }
@@ -148,13 +151,23 @@ for (let i = 0; i < board.length; i++) {
             else {
 
                 if ((active == true) && is_empty(clicked_box)) {
-                    move(active_box, clicked_box);
+                    const valid = move(active_box, clicked_box);
 
-                    // MUOVI L'IMMAGINE
+                    if (valid === true) {
+                        // MUOVI L'IMMAGINE
+                        const activeBoxHtml = document.getElementById(`${active_box.x},${active_box.y}`);
+                        const clickedBoxHtml = document.getElementById(`${clicked_box.x},${clicked_box.y}`);
+    
+                        clickedBoxHtml.innerHTML = activeBoxHtml.innerHTML;
+                        activeBoxHtml.innerHTML = "";
 
-                    console.log("Disattivando: ", clicked_box);
-                    active = false;
-                    active_box = null;
+                        console.log("Disattivando: ", clicked_box);
+                        active = false;
+                        active_box = null;
+                    } else {
+                        alert("invalid move");
+                    }
+
                 }
             }
         })
@@ -188,10 +201,11 @@ function move(box, destination) {
                     piece: "",
                     player: -1,
                 };
+
+                return true;
             } else {
-                alert("invalid move!");
+                return false;
             }
-            break;
 
         case "rook":
             // MOVE ROOK
@@ -209,8 +223,10 @@ function move(box, destination) {
                     piece: "",
                     player: -1,
                 };
+
+                return true;
             } else {
-                alert("invalid move!");
+                return false;
             }
             break;
 
@@ -237,10 +253,11 @@ function move(box, destination) {
                     piece: "",
                     player: -1,
                 };
+
+                return true;
             } else {
-                alert("invalid move!");
+                return false;
             }
-            break;
 
         case "bishop":
             // MOVE BISHOP
@@ -258,10 +275,11 @@ function move(box, destination) {
                     piece: "",
                     player: -1,
                 };
+
+                return true;
             } else {
-                alert("invalid move!");
+                return false;
             }
-            break;
 
         case "king":
             // MOVE KING
@@ -286,8 +304,10 @@ function move(box, destination) {
                     piece: "",
                     player: -1,
                 };
+
+                return true;
             } else {
-                alert("invalid move!");
+                return false;
             }
             break;
 
@@ -308,8 +328,10 @@ function move(box, destination) {
                     piece: "",
                     player: -1,
                 };
+
+                return true;
             } else {
-                alert("invalid move!");
+                return false;
             }
             break;
 
