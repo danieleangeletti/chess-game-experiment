@@ -231,26 +231,6 @@ function move(box, destination) {
 
     case "rook":
       // MOVE ROOK
-      // if (destination.x == box.x || destination.y == box.y) {
-      //   board[destination.x][destination.y] = {
-      //     x: destination.x,
-      //     y: destination.y,
-      //     piece: box.piece,
-      //     player: box.player,
-      //   };
-
-      //   board[box.x][box.y] = {
-      //     x: box.x,
-      //     y: box.y,
-      //     piece: "",
-      //     player: -1,
-      //   };
-
-      //   return true;
-      // } else {
-      //   return false;
-      // }
-      // break;
 
       // ---------- REGOLE PER IMPEDIRE ALLA TORRE DI SCAVALCARE UN PEZZO MIO INIZIO ----------
 
@@ -306,7 +286,27 @@ function move(box, destination) {
         return true;
       }
       // RIGHT
-      if (destination.x < box.x && destination.y == box.y) {
+      if (destination.x > box.x && destination.y == box.y) {
+        for (let i = box.x + 1; i <= destination.x; i++) {
+          if (!is_empty(board[i][destination.y])) {
+            return false;
+          }
+        }
+        board[destination.x][destination.y] = {
+          x: destination.x,
+          y: destination.y,
+          piece: box.piece,
+          player: box.player,
+        };
+
+        board[box.x][box.y] = {
+          x: box.x,
+          y: box.y,
+          piece: "",
+          player: -1,
+        };
+
+        return true;
       }
       // DOWN
       if (destination.x == box.x && destination.y > box.y) {
