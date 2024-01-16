@@ -231,7 +231,44 @@ function move(box, destination) {
 
     case "rook":
       // MOVE ROOK
-      if (destination.x == box.x || destination.y == box.y) {
+      // if (destination.x == box.x || destination.y == box.y) {
+      //   board[destination.x][destination.y] = {
+      //     x: destination.x,
+      //     y: destination.y,
+      //     piece: box.piece,
+      //     player: box.player,
+      //   };
+
+      //   board[box.x][box.y] = {
+      //     x: box.x,
+      //     y: box.y,
+      //     piece: "",
+      //     player: -1,
+      //   };
+
+      //   return true;
+      // } else {
+      //   return false;
+      // }
+      // break;
+
+      // ---------- REGOLE PER IMPEDIRE ALLA TORRE DI SCAVALCARE UN PEZZO MIO INIZIO ----------
+
+      // - Capire se il pezzo sta andando in basso, in alto, a sinistra, o destra.
+      // - Con un ciclo for, scorri la direzione trovata al passo precedente, partendo da 'box' fino a 'destination'.
+      // - In ogni iterazione del for, chiama is_empty(). Se ritorna false, esci dal ciclo e la mossa è invalida.
+      // - Se tutte le chiamate a is_empty ritornano true, la mossa è valida.
+
+      // LEFT
+      if (destination.x > box.x || destination.y == box.y) {
+      }
+      // UP
+      if (destination.x == box.x || destination.y < box.y) {
+        for (let i = box.y - 1; i >= destination.y; i--) {
+          if (!is_empty(board[box.x][i])) {
+            return false;
+          }
+        }
         board[destination.x][destination.y] = {
           x: destination.x,
           y: destination.y,
@@ -247,17 +284,13 @@ function move(box, destination) {
         };
 
         return true;
-      } else {
-        return false;
       }
-      break;
-
-    // ---------- REGOLE PER IMPEDIRE ALLA TORRE DI SCAVALCARE UN PEZZO MIO INIZIO ----------
-
-    // - Capire se il pezzo sta andando in basso, in alto, a sinistra, o destra.
-    // - Con un ciclo for, scorri la direzione trovata al passo precedente, partendo da 'box' fino a 'destination'.
-    // - In ogni iterazione del for, chiama is_empty(). Se ritorna false, esci dal ciclo e la mossa è invalida.
-    // - Se tutte le chiamate a is_empty ritornano true, la mossa è valida.
+      // RIGHT
+      if (destination.x < box.x || destination.y == box.y) {
+      }
+      // DOWN
+      if (destination.x == box.x || destination.y > box.y) {
+      }
 
     // ---------- REGOLE PER IMPEDIRE ALLA TORRE DI SCAVALCARE UN PEZZO MIO FINE ----------
 
