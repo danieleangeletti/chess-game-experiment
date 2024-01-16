@@ -296,43 +296,62 @@ function move(box, destination) {
     case "bishop":
       // MOVE BISHOP
 
-      const xDiff = destination.x - box.x;
-      const yDiff = destination.y - box.y;
+      const x_diff = destination.x - box.x;
+      const y_diff = destination.y - box.y;
 
-      if (Math.abs(xDiff) != Math.abs(yDiff)) {
+      if (Math.abs(x_diff) != Math.abs(y_diff)) {
         return false;
       }
 
       // Se stiamo qui, sappiamo che
-      // Math.abs(xDiff) == Math.abs(yDiff)
+      // Math.abs(x_diff) == Math.abs(y_diff)
+
+      const number_of_moves = Math.abs(x_diff);
 
       // LEFT-DOWN
-      // La x si abbassa della stessa quantita di cui si alza la y
-      // Se xDiff < 0 e yDiff > 0
+      if (x_diff < 0 && y_diff > 0) {
+        for (let i = 1; i <= number_of_moves; i++) {
+          if (!is_empty(board[box.x - i][box.y + i])) {
+            return false;
+          }
+        }
 
-      if (xDiff < 0 && yDiff > 0) {
-        console.log("left down");
         applyMove(box, destination);
         return true;
       }
 
       // LEFT-UP
-      if (xDiff < 0 && yDiff < 0) {
-        console.log("left up");
+      if (x_diff < 0 && y_diff < 0) {
+        for (let i = 1; i <= number_of_moves; i++) {
+          if (!is_empty(board[box.x - i][box.y - i])) {
+            return false;
+          }
+        }
+
         applyMove(box, destination);
         return true;
       }
 
       // RIGHT-UP
-      if (xDiff > 0 && yDiff < 0) {
-        console.log("right up");
+      if (x_diff > 0 && y_diff < 0) {
+        for (let i = 1; i <= number_of_moves; i++) {
+          if (!is_empty(board[box.x + i][box.y - i])) {
+            return false;
+          }
+        }
+
         applyMove(box, destination);
         return true;
       }
 
       // RIGHT-DOWN
-      if (xDiff > 0 && yDiff > 0) {
-        console.log("right down");
+      if (x_diff > 0 && y_diff > 0) {
+        for (let i = 1; i <= number_of_moves; i++) {
+          if (!is_empty(board[box.x - i][box.y + i])) {
+            return false;
+          }
+        }
+
         applyMove(box, destination);
         return true;
       }
@@ -349,19 +368,7 @@ function move(box, destination) {
         (destination.x == box.x && destination.y == box.y - 1) ||
         (destination.x == box.x - 1 && destination.y == box.y - 1)
       ) {
-        board[destination.x][destination.y] = {
-          x: destination.x,
-          y: destination.y,
-          piece: box.piece,
-          player: box.player,
-        };
-
-        board[box.x][box.y] = {
-          x: box.x,
-          y: box.y,
-          piece: "",
-          player: -1,
-        };
+        applyMove(box, destination);
 
         return true;
       } else {
@@ -376,19 +383,7 @@ function move(box, destination) {
         destination.x == box.x ||
         destination.y == box.y
       ) {
-        board[destination.x][destination.y] = {
-          x: destination.x,
-          y: destination.y,
-          piece: box.piece,
-          player: box.player,
-        };
-
-        board[box.x][box.y] = {
-          x: box.x,
-          y: box.y,
-          piece: "",
-          player: -1,
-        };
+        applyMove(box, destination);
 
         return true;
       } else {
