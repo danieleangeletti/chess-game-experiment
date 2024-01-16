@@ -154,7 +154,6 @@ for (let i = 0; i < board[0].length; i++) {
 }
 
 // GESTIONE CLICK
-
 let active = false;
 let clicked_box = null;
 let active_box = null;
@@ -232,53 +231,38 @@ function move(box, destination) {
 
     case "rook":
       // MOVE ROOK
-      // if (destination.x == box.x || destination.y == box.y) {
-      //   board[destination.x][destination.y] = {
-      //     x: destination.x,
-      //     y: destination.y,
-      //     piece: box.piece,
-      //     player: box.player,
-      //   };
-
-      //   board[box.x][box.y] = {
-      //     x: box.x,
-      //     y: box.y,
-      //     piece: "",
-      //     player: -1,
-      //   };
-
-      //   return true;
-      // } else {
-      //   return false;
-      // }
-      // break;
-
-      // ---------- TEST ----------
       if (destination.x == box.x || destination.y == box.y) {
-        for (let i = 0; i < 8; i++) {
-          if (is_empty(board[box.x][i])) {
-            board[destination.x][destination.y] = {
-              x: destination.x,
-              y: destination.y,
-              piece: box.piece,
-              player: box.player,
-            };
+        board[destination.x][destination.y] = {
+          x: destination.x,
+          y: destination.y,
+          piece: box.piece,
+          player: box.player,
+        };
 
-            board[box.x][box.y] = {
-              x: box.x,
-              y: box.y,
-              piece: "",
-              player: -1,
-            };
+        board[box.x][box.y] = {
+          x: box.x,
+          y: box.y,
+          piece: "",
+          player: -1,
+        };
 
-            return true;
-          } else {
-            return false;
-          }
-        }
+        return true;
+      } else {
+        return false;
       }
       break;
-    // ---------- TEST ----------
+
+    // ---------- REGOLE PER IMPEDIRE ALLA TORRE DI SCAVALCARE UN PEZZO MIO INIZIO ----------
+
+    // - Con una if escludo le caselle che non appartengono alla direzione a sinistra, in alto, a destra e in basso.
+    // - Per ogni direzione scorro tutte le caselle con un ciclo for.
+    // - Se lungo una direzione c'è una casella occupata da un pezzo mio, seleziono questa casella.
+    // - Se questa casella si trova alla sinistra della torre (stessa direzione) la x della destinazione deve essere maggiore della x della casella, mentre la y della destinazione deve essere uguale alla y della casella.
+    // - Se questa casella si trova più in alto rispetto alla torre (stessa direzione) la x della destinazione deve essere uguale della x della casella, la y della destinazione deve essere minore alla y della casella.
+    // - Se questa casella si trova alla destra della torre (stessa direzione) la x della destinazione deve essere minore della x della casella, mentre la y della destinazione deve essere uguale alla y della casella.
+    // - Se questa casella si trova più in basso rispetto alla torre (stessa direzione) la x della destinazione deve essere uguale alla x della casella, mentre la y della destinazione deve essere minore alla y della casella.
+
+    // ---------- REGOLE PER IMPEDIRE ALLA TORRE DI SCAVALCARE UN PEZZO MIO FINE ----------
 
     case "knight":
       // MOVE KNIGHT
