@@ -260,7 +260,27 @@ function move(box, destination) {
       // - Se tutte le chiamate a is_empty ritornano true, la mossa è valida.
 
       // LEFT
-      if (destination.x > box.x && destination.y == box.y) {
+      if (destination.x < box.x && destination.y == box.y) {
+        for (let i = box.x - 1; i >= destination.x; i--) {
+          if (!is_empty(board[i][destination.y])) {
+            return false;
+          }
+          board[destination.x][destination.y] = {
+            x: destination.x,
+            y: destination.y,
+            piece: box.piece,
+            player: box.player,
+          };
+
+          board[box.x][box.y] = {
+            x: box.x,
+            y: box.y,
+            piece: "",
+            player: -1,
+          };
+
+          return true;
+        }
       }
       // UP
       if (destination.x == box.x && destination.y < box.y) {
