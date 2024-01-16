@@ -190,7 +190,7 @@ for (let i = 0; i < board.length; i++) {
             active = false;
             active_box = null;
           } else {
-            alert("invalid move");
+            alert("Invalid move");
           }
         }
       }
@@ -205,6 +205,10 @@ function is_empty(box) {
 }
 
 function move(box, destination) {
+  const x_diff = destination.x - box.x;
+  const y_diff = destination.y - box.y;
+  const number_of_moves = Math.abs(x_diff);
+
   // MUOVE LA CASELLA 'BOX' VERSO LA CASELLA 'DESTINATION'.
   switch (box.piece) {
     case "pawn":
@@ -296,17 +300,12 @@ function move(box, destination) {
     case "bishop":
       // MOVE BISHOP
 
-      const x_diff = destination.x - box.x;
-      const y_diff = destination.y - box.y;
-
       if (Math.abs(x_diff) != Math.abs(y_diff)) {
         return false;
       }
 
       // Se stiamo qui, sappiamo che
       // Math.abs(x_diff) == Math.abs(y_diff)
-
-      const number_of_moves = Math.abs(x_diff);
 
       // LEFT-DOWN
       if (x_diff < 0 && y_diff > 0) {
@@ -347,7 +346,7 @@ function move(box, destination) {
       // RIGHT-DOWN
       if (x_diff > 0 && y_diff > 0) {
         for (let i = 1; i <= number_of_moves; i++) {
-          if (!is_empty(board[box.x - i][box.y + i])) {
+          if (!is_empty(board[box.x + i][box.y + i])) {
             return false;
           }
         }
@@ -374,25 +373,109 @@ function move(box, destination) {
       } else {
         return false;
       }
-      break;
 
     case "queen":
       // MOVE QUEEN
-      if (
-        Math.abs(destination.x - box.x) == Math.abs(destination.y - box.y) ||
-        destination.x == box.x ||
-        destination.y == box.y
-      ) {
+
+      // LEFT
+      if (destination.x < box.x && destination.y == box.y) {
+        for (let i = box.x - 1; i >= destination.x; i--) {
+          if (!is_empty(board[i][destination.y])) {
+            return false;
+          }
+          applyMove(box, destination);
+
+          return true;
+        }
+      }
+      // UP
+      if (destination.x == box.x && destination.y < box.y) {
+        for (let i = box.y - 1; i >= destination.y; i--) {
+          if (!is_empty(board[box.x][i])) {
+            return false;
+          }
+        }
         applyMove(box, destination);
 
         return true;
-      } else {
+      }
+      // RIGHT
+      if (destination.x > box.x && destination.y == box.y) {
+        for (let i = box.x + 1; i <= destination.x; i++) {
+          if (!is_empty(board[i][destination.y])) {
+            return false;
+          }
+        }
+        applyMove(box, destination);
+
+        return true;
+      }
+      // DOWN
+      if (destination.x == box.x && destination.y > box.y) {
+        for (let i = box.y + 1; i <= destination.y; i++) {
+          if (!is_empty(board[box.x][i])) {
+            return false;
+          }
+        }
+        applyMove(box, destination);
+
+        return true;
+      }
+
+      if (Math.abs(x_diff) != Math.abs(y_diff)) {
         return false;
       }
-      break;
+
+      // LEFT-DOWN
+      if (x_diff < 0 && y_diff > 0) {
+        for (let i = 1; i <= number_of_moves; i++) {
+          if (!is_empty(board[box.x - i][box.y + i])) {
+            return false;
+          }
+        }
+
+        applyMove(box, destination);
+        return true;
+      }
+
+      // LEFT-UP
+      if (x_diff < 0 && y_diff < 0) {
+        for (let i = 1; i <= number_of_moves; i++) {
+          if (!is_empty(board[box.x - i][box.y - i])) {
+            return false;
+          }
+        }
+
+        applyMove(box, destination);
+        return true;
+      }
+
+      // RIGHT-UP
+      if (x_diff > 0 && y_diff < 0) {
+        for (let i = 1; i <= number_of_moves; i++) {
+          if (!is_empty(board[box.x + i][box.y - i])) {
+            return false;
+          }
+        }
+
+        applyMove(box, destination);
+        return true;
+      }
+
+      // RIGHT-DOWN
+      if (x_diff > 0 && y_diff > 0) {
+        for (let i = 1; i <= number_of_moves; i++) {
+          if (!is_empty(board[box.x + i][box.y + i])) {
+            return false;
+          }
+        }
+
+        applyMove(box, destination);
+        return true;
+      }
 
     default:
-      alert("invalid piece");
+      alert("Invalid piece");
   }
 }
 
