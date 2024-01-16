@@ -254,13 +254,10 @@ function move(box, destination) {
 
     // ---------- REGOLE PER IMPEDIRE ALLA TORRE DI SCAVALCARE UN PEZZO MIO INIZIO ----------
 
-    // - Con una if escludo le caselle che non appartengono alla direzione a sinistra, in alto, a destra e in basso.
-    // - Per ogni direzione scorro tutte le caselle con un ciclo for.
-    // - Se lungo una direzione c'è una casella occupata da un pezzo mio, seleziono questa casella.
-    // - Se questa casella si trova alla sinistra della torre (stessa direzione) la x della destinazione deve essere maggiore della x della casella, mentre la y della destinazione deve essere uguale alla y della casella.
-    // - Se questa casella si trova più in alto rispetto alla torre (stessa direzione) la x della destinazione deve essere uguale della x della casella, la y della destinazione deve essere minore alla y della casella.
-    // - Se questa casella si trova alla destra della torre (stessa direzione) la x della destinazione deve essere minore della x della casella, mentre la y della destinazione deve essere uguale alla y della casella.
-    // - Se questa casella si trova più in basso rispetto alla torre (stessa direzione) la x della destinazione deve essere uguale alla x della casella, mentre la y della destinazione deve essere minore alla y della casella.
+    // - Capire se il pezzo sta andando in basso, in alto, a sinistra, o destra.
+    // - Con un ciclo for, scorri la direzione trovata al passo precedente, partendo da 'box' fino a 'destination'.
+    // - In ogni iterazione del for, chiama is_empty(). Se ritorna false, esci dal ciclo e la mossa è invalida.
+    // - Se tutte le chiamate a is_empty ritornano true, la mossa è valida.
 
     // ---------- REGOLE PER IMPEDIRE ALLA TORRE DI SCAVALCARE UN PEZZO MIO FINE ----------
 
