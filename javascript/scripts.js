@@ -210,19 +210,7 @@ function move(box, destination) {
     case "pawn":
       // MOVE PAWN
       if (destination.x == box.x && destination.y == box.y - 1) {
-        board[destination.x][destination.y] = {
-          x: destination.x,
-          y: destination.y,
-          piece: box.piece,
-          player: box.player,
-        };
-
-        board[box.x][box.y] = {
-          x: box.x,
-          y: box.y,
-          piece: "",
-          player: -1,
-        };
+        applyMove(box, destination);
 
         return true;
       } else {
@@ -239,25 +227,15 @@ function move(box, destination) {
       // - In ogni iterazione del for, chiama is_empty(). Se ritorna false, esci dal ciclo e la mossa è invalida.
       // - Se tutte le chiamate a is_empty ritornano true, la mossa è valida.
 
+      // ---------- REGOLE PER IMPEDIRE ALLA TORRE DI SCAVALCARE UN PEZZO MIO FINE ----------
+
       // LEFT
       if (destination.x < box.x && destination.y == box.y) {
         for (let i = box.x - 1; i >= destination.x; i--) {
           if (!is_empty(board[i][destination.y])) {
             return false;
           }
-          board[destination.x][destination.y] = {
-            x: destination.x,
-            y: destination.y,
-            piece: box.piece,
-            player: box.player,
-          };
-
-          board[box.x][box.y] = {
-            x: box.x,
-            y: box.y,
-            piece: "",
-            player: -1,
-          };
+          applyMove(box, destination);
 
           return true;
         }
@@ -269,19 +247,7 @@ function move(box, destination) {
             return false;
           }
         }
-        board[destination.x][destination.y] = {
-          x: destination.x,
-          y: destination.y,
-          piece: box.piece,
-          player: box.player,
-        };
-
-        board[box.x][box.y] = {
-          x: box.x,
-          y: box.y,
-          piece: "",
-          player: -1,
-        };
+        applyMove(box, destination);
 
         return true;
       }
@@ -292,19 +258,7 @@ function move(box, destination) {
             return false;
           }
         }
-        board[destination.x][destination.y] = {
-          x: destination.x,
-          y: destination.y,
-          piece: box.piece,
-          player: box.player,
-        };
-
-        board[box.x][box.y] = {
-          x: box.x,
-          y: box.y,
-          piece: "",
-          player: -1,
-        };
+        applyMove(box, destination);
 
         return true;
       }
@@ -315,24 +269,10 @@ function move(box, destination) {
             return false;
           }
         }
-        board[destination.x][destination.y] = {
-          x: destination.x,
-          y: destination.y,
-          piece: box.piece,
-          player: box.player,
-        };
-
-        board[box.x][box.y] = {
-          x: box.x,
-          y: box.y,
-          piece: "",
-          player: -1,
-        };
+        applyMove(box, destination);
 
         return true;
       }
-
-    // ---------- REGOLE PER IMPEDIRE ALLA TORRE DI SCAVALCARE UN PEZZO MIO FINE ----------
 
     case "knight":
       // MOVE KNIGHT
@@ -346,19 +286,7 @@ function move(box, destination) {
         (destination.x == box.x + 1 && destination.y == box.y - 2) ||
         (destination.x == box.x - 1 && destination.y == box.y - 2)
       ) {
-        board[destination.x][destination.y] = {
-          x: destination.x,
-          y: destination.y,
-          piece: box.piece,
-          player: box.player,
-        };
-
-        board[box.x][box.y] = {
-          x: box.x,
-          y: box.y,
-          piece: "",
-          player: -1,
-        };
+        applyMove(box, destination);
 
         return true;
       } else {
@@ -367,24 +295,46 @@ function move(box, destination) {
 
     case "bishop":
       // MOVE BISHOP
-      if (Math.abs(destination.x - box.x) == Math.abs(destination.y - box.y)) {
-        board[destination.x][destination.y] = {
-          x: destination.x,
-          y: destination.y,
-          piece: box.piece,
-          player: box.player,
-        };
 
-        board[box.x][box.y] = {
-          x: box.x,
-          y: box.y,
-          piece: "",
-          player: -1,
-        };
+      const xDiff = destination.x - box.x;
+      const yDiff = destination.y - box.y;
 
-        return true;
-      } else {
+      if (Math.abs(xDiff) != Math.abs(yDiff)) {
         return false;
+      }
+
+      // Se stiamo qui, sappiamo che
+      // Math.abs(xDiff) == Math.abs(yDiff)
+
+      // LEFT-DOWN
+      // La x si abbassa della stessa quantita di cui si alza la y
+      // Se xDiff < 0 e yDiff > 0
+
+      if (xDiff < 0 && yDiff > 0) {
+        console.log("left down");
+        applyMove(box, destination);
+        return true;
+      }
+
+      // LEFT-UP
+      if (xDiff < 0 && yDiff < 0) {
+        console.log("left up");
+        applyMove(box, destination);
+        return true;
+      }
+
+      // RIGHT-UP
+      if (xDiff > 0 && yDiff < 0) {
+        console.log("right up");
+        applyMove(box, destination);
+        return true;
+      }
+
+      // RIGHT-DOWN
+      if (xDiff > 0 && yDiff > 0) {
+        console.log("right down");
+        applyMove(box, destination);
+        return true;
       }
 
     case "king":
@@ -449,4 +399,20 @@ function move(box, destination) {
     default:
       alert("invalid piece");
   }
+}
+
+function applyMove(box, destination) {
+  board[destination.x][destination.y] = {
+    x: destination.x,
+    y: destination.y,
+    piece: box.piece,
+    player: box.player,
+  };
+
+  board[box.x][box.y] = {
+    x: box.x,
+    y: box.y,
+    piece: "",
+    player: -1,
+  };
 }
