@@ -171,7 +171,10 @@ for (let i = 0; i < board.length; i++) {
         active = true;
         console.log("Attivando: ", active_box);
       } else {
-        if (active == true && is_empty(clicked_box)) {
+        if (
+          active == true &&
+          (is_empty(clicked_box) || clicked_box.player != active_box.player)
+        ) {
           const valid = move(active_box, clicked_box);
 
           if (valid === true) {
@@ -237,46 +240,67 @@ function move(box, destination) {
       if (destination.x < box.x && destination.y == box.y) {
         for (let i = box.x - 1; i >= destination.x; i--) {
           if (!is_empty(board[i][destination.y])) {
+            if (box.player != board[box.x][i].player) {
+              // Break esce dal ciclo for.
+              break;
+            }
             return false;
           }
-          applyMove(box, destination);
-
-          return true;
         }
+
+        applyMove(box, destination);
+        return true;
       }
+
       // UP
       if (destination.x == box.x && destination.y < box.y) {
         for (let i = box.y - 1; i >= destination.y; i--) {
           if (!is_empty(board[box.x][i])) {
+            if (box.player != board[box.x][i].player) {
+              // Break esce dal ciclo for.
+              break;
+            }
             return false;
           }
         }
-        applyMove(box, destination);
 
+        applyMove(box, destination);
         return true;
       }
+
       // RIGHT
       if (destination.x > box.x && destination.y == box.y) {
         for (let i = box.x + 1; i <= destination.x; i++) {
           if (!is_empty(board[i][destination.y])) {
+            if (box.player != board[box.x][i].player) {
+              // Break esce dal ciclo for.
+              break;
+            }
             return false;
           }
         }
-        applyMove(box, destination);
 
+        applyMove(box, destination);
         return true;
       }
+
       // DOWN
       if (destination.x == box.x && destination.y > box.y) {
         for (let i = box.y + 1; i <= destination.y; i++) {
           if (!is_empty(board[box.x][i])) {
+            if (box.player != board[box.x][i].player) {
+              // Break esce dal ciclo for.
+              break;
+            }
             return false;
           }
         }
-        applyMove(box, destination);
 
+        applyMove(box, destination);
         return true;
       }
+
+      return false;
 
     case "knight":
       // MOVE KNIGHT
@@ -290,9 +314,12 @@ function move(box, destination) {
         (destination.x == box.x + 1 && destination.y == box.y - 2) ||
         (destination.x == box.x - 1 && destination.y == box.y - 2)
       ) {
-        applyMove(box, destination);
-
-        return true;
+        if (is_empty(destination) || box.player != destination.player) {
+          applyMove(box, destination);
+          return true;
+        } else {
+          return false;
+        }
       } else {
         return false;
       }
@@ -355,6 +382,8 @@ function move(box, destination) {
         return true;
       }
 
+      return false;
+
     case "king":
       // MOVE KING
       if (
@@ -388,6 +417,7 @@ function move(box, destination) {
           return true;
         }
       }
+
       // UP
       if (destination.x == box.x && destination.y < box.y) {
         for (let i = box.y - 1; i >= destination.y; i--) {
@@ -395,10 +425,11 @@ function move(box, destination) {
             return false;
           }
         }
-        applyMove(box, destination);
 
+        applyMove(box, destination);
         return true;
       }
+
       // RIGHT
       if (destination.x > box.x && destination.y == box.y) {
         for (let i = box.x + 1; i <= destination.x; i++) {
@@ -406,10 +437,11 @@ function move(box, destination) {
             return false;
           }
         }
-        applyMove(box, destination);
 
+        applyMove(box, destination);
         return true;
       }
+
       // DOWN
       if (destination.x == box.x && destination.y > box.y) {
         for (let i = box.y + 1; i <= destination.y; i++) {
@@ -417,8 +449,8 @@ function move(box, destination) {
             return false;
           }
         }
-        applyMove(box, destination);
 
+        applyMove(box, destination);
         return true;
       }
 
@@ -473,6 +505,8 @@ function move(box, destination) {
         applyMove(box, destination);
         return true;
       }
+
+      return false;
 
     default:
       alert("Invalid piece");
