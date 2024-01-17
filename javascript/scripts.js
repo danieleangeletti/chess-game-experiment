@@ -185,11 +185,46 @@ for (let i = 0; i < board.length; i++) {
         return;
       }
 
-      const adesso_ho_cliccato_la_casella_dove_voglio_andare =
-        active == true &&
-        (is_empty(clicked_box) || clicked_box.player != active_box.player);
+      // Questa if vuol dire che se active è false in questo momento non c'è nessuna casella attiva, perciò
+      // il resto del codice non ha senso girarlo e quindi esci.
+      const adesso_ho_cliccato_la_casella_dove_voglio_andare = active == true;
+      if (!adesso_ho_cliccato_la_casella_dove_voglio_andare) {
+        return;
+      }
+
+      const casella_vuota = is_empty(clicked_box);
+
+      const casella_altro_giocatore = clicked_box.player != active_box.player;
 
       if (adesso_ho_cliccato_la_casella_dove_voglio_andare) {
+        if (
+          clicked_box.x == active_box.x &&
+          clicked_box.y == active_box.y &&
+          clicked_box.player == active_box.player &&
+          clicked_box.piece == active_box.piece
+        ) {
+          console.log("Disattivando: ", active_box);
+          const my_active_box_html = document.getElementById(
+            `${active_box.x},${active_box.y}`
+          );
+          my_active_box_html.classList.remove("bg-primary");
+
+          if ((active_box.x + active_box.y) % 2 != 0) {
+            my_active_box_html.classList.add("bg-dark");
+          } else {
+            my_active_box_html.classList.add("bg-white");
+          }
+          active = false;
+          active_box = null;
+
+          return;
+        }
+      }
+
+      if (
+        adesso_ho_cliccato_la_casella_dove_voglio_andare &&
+        (casella_vuota || casella_altro_giocatore)
+      ) {
         const valid = move(active_box, clicked_box);
 
         if (valid === true) {
