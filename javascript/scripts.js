@@ -240,7 +240,7 @@ function move(box, destination) {
       if (destination.x < box.x && destination.y == box.y) {
         for (let i = box.x - 1; i >= destination.x; i--) {
           if (!is_empty(board[i][destination.y])) {
-            if (box.player != board[box.x][i].player) {
+            if (box.player != board[i][destination.y].player) {
               // Break esce dal ciclo for.
               break;
             }
@@ -272,7 +272,7 @@ function move(box, destination) {
       if (destination.x > box.x && destination.y == box.y) {
         for (let i = box.x + 1; i <= destination.x; i++) {
           if (!is_empty(board[i][destination.y])) {
-            if (box.player != board[box.x][i].player) {
+            if (box.player != board[i][destination.y].player) {
               // Break esce dal ciclo for.
               break;
             }
