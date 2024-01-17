@@ -427,18 +427,26 @@ function move(box, destination) {
       if (destination.x < box.x && destination.y == box.y) {
         for (let i = box.x - 1; i >= destination.x; i--) {
           if (!is_empty(board[i][destination.y])) {
+            if (box.player != board[i][destination.y].player) {
+              // Break esce dal ciclo for.
+              break;
+            }
             return false;
           }
-          applyMove(box, destination);
-
-          return true;
         }
+
+        applyMove(box, destination);
+        return true;
       }
 
       // UP
       if (destination.x == box.x && destination.y < box.y) {
         for (let i = box.y - 1; i >= destination.y; i--) {
           if (!is_empty(board[box.x][i])) {
+            if (box.player != board[box.x][i].player) {
+              // Break esce dal ciclo for.
+              break;
+            }
             return false;
           }
         }
@@ -451,6 +459,10 @@ function move(box, destination) {
       if (destination.x > box.x && destination.y == box.y) {
         for (let i = box.x + 1; i <= destination.x; i++) {
           if (!is_empty(board[i][destination.y])) {
+            if (box.player != board[i][destination.y].player) {
+              // Break esce dal ciclo for.
+              break;
+            }
             return false;
           }
         }
@@ -463,6 +475,10 @@ function move(box, destination) {
       if (destination.x == box.x && destination.y > box.y) {
         for (let i = box.y + 1; i <= destination.y; i++) {
           if (!is_empty(board[box.x][i])) {
+            if (box.player != board[box.x][i].player) {
+              // Break esce dal ciclo for.
+              break;
+            }
             return false;
           }
         }
@@ -479,6 +495,10 @@ function move(box, destination) {
       if (x_diff < 0 && y_diff > 0) {
         for (let i = 1; i <= number_of_moves; i++) {
           if (!is_empty(board[box.x - i][box.y + i])) {
+            if (box.player != board[box.x - i][box.y + i].player) {
+              // Break esce dal ciclo for.
+              break;
+            }
             return false;
           }
         }
@@ -491,6 +511,10 @@ function move(box, destination) {
       if (x_diff < 0 && y_diff < 0) {
         for (let i = 1; i <= number_of_moves; i++) {
           if (!is_empty(board[box.x - i][box.y - i])) {
+            if (box.player != board[box.x - i][box.y - i].player) {
+              // Break esce dal ciclo for.
+              break;
+            }
             return false;
           }
         }
@@ -503,6 +527,10 @@ function move(box, destination) {
       if (x_diff > 0 && y_diff < 0) {
         for (let i = 1; i <= number_of_moves; i++) {
           if (!is_empty(board[box.x + i][box.y - i])) {
+            if (box.player != board[box.x + i][box.y - i].player) {
+              // Break esce dal ciclo for.
+              break;
+            }
             return false;
           }
         }
@@ -515,6 +543,10 @@ function move(box, destination) {
       if (x_diff > 0 && y_diff > 0) {
         for (let i = 1; i <= number_of_moves; i++) {
           if (!is_empty(board[box.x + i][box.y + i])) {
+            if (box.player != board[box.x + i][box.y + i].player) {
+              // Break esce dal ciclo for.
+              break;
+            }
             return false;
           }
         }
