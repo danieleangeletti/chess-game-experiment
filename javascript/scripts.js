@@ -412,9 +412,10 @@ function move(box, destination) {
         (destination.x == box.x && destination.y == box.y - 1) ||
         (destination.x == box.x - 1 && destination.y == box.y - 1)
       ) {
-        applyMove(box, destination);
-
-        return true;
+        if (is_empty(destination) || box.player != destination.player) {
+          applyMove(box, destination);
+          return true;
+        }
       } else {
         return false;
       }
