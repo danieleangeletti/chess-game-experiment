@@ -166,36 +166,58 @@ for (let i = 0; i < board.length; i++) {
     my_box.addEventListener("click", function () {
       clicked_box = board[j][i];
 
-      if (active == false && clicked_box.player == 0 && turn == 0) {
+      const adesso_ho_cliccato_la_casella_che_voglio_muovere =
+        active == false && clicked_box.player == 0 && turn == 0;
+
+      if (adesso_ho_cliccato_la_casella_che_voglio_muovere) {
         active_box = board[j][i];
         active = true;
+
+        const activeBoxHtml = document.getElementById(
+          `${active_box.x},${active_box.y}`
+        );
+        activeBoxHtml.classList.remove("bg-white");
+        activeBoxHtml.classList.remove("bg-dark");
+        activeBoxHtml.classList.add("bg-primary");
+
         console.log("Attivando: ", active_box);
-      } else {
-        if (
-          active == true &&
-          (is_empty(clicked_box) || clicked_box.player != active_box.player)
-        ) {
-          const valid = move(active_box, clicked_box);
+        return;
+      }
 
-          if (valid === true) {
-            // MUOVI L'IMMAGINE
-            const activeBoxHtml = document.getElementById(
-              `${active_box.x},${active_box.y}`
-            );
-            const clickedBoxHtml = document.getElementById(
-              `${clicked_box.x},${clicked_box.y}`
-            );
+      const adesso_ho_cliccato_la_casella_dove_voglio_andare =
+        active == true &&
+        (is_empty(clicked_box) || clicked_box.player != active_box.player);
 
-            clickedBoxHtml.innerHTML = activeBoxHtml.innerHTML;
-            activeBoxHtml.innerHTML = "";
+      if (adesso_ho_cliccato_la_casella_dove_voglio_andare) {
+        const valid = move(active_box, clicked_box);
 
-            console.log("Disattivando: ", clicked_box);
-            active = false;
-            active_box = null;
+        if (valid === true) {
+          // MUOVI L'IMMAGINE
+          const activeBoxHtml = document.getElementById(
+            `${active_box.x},${active_box.y}`
+          );
+          activeBoxHtml.classList.remove("bg-primary");
+
+          if ((active_box.x + active_box.y) % 2 != 0) {
+            activeBoxHtml.classList.add("bg-dark");
           } else {
-            alert("Invalid move");
+            activeBoxHtml.classList.add("bg-white");
           }
+          const clickedBoxHtml = document.getElementById(
+            `${clicked_box.x},${clicked_box.y}`
+          );
+
+          clickedBoxHtml.innerHTML = activeBoxHtml.innerHTML;
+          activeBoxHtml.innerHTML = "";
+
+          console.log("Disattivando: ", clicked_box);
+          active = false;
+          active_box = null;
+        } else {
+          alert("Invalid move");
         }
+
+        return;
       }
     });
   }

@@ -1,31 +1,31 @@
 body {
-    background-image: url("https://www.psicologiacontemporanea.it/media/filer_public_thumbnails/filer_public/d0/97/d09726dd-e59e-4310-a6b2-01ced4d1158c/scacchi.jpg__4928x3264_q85_crop_subject_location-2464%2C1631_subsampling-2_upscale.jpg");
-    background-size: cover;
+  background-image: url("https://www.psicologiacontemporanea.it/media/filer_public_thumbnails/filer_public/d0/97/d09726dd-e59e-4310-a6b2-01ced4d1158c/scacchi.jpg__4928x3264_q85_crop_subject_location-2464%2C1631_subsampling-2_upscale.jpg");
+  background-size: cover;
 }
 
 .big-font {
-    font-size: 3em;
+  font-size: 3em;
 }
 
 #chess-container {
-    width: 570px;
-    height: 570px;
+  width: 570px;
+  height: 570px;
 }
 
 .square {
-    width: calc(570px / 8);
-    height: calc(570px / 8);
-    cursor: pointer;
+  width: calc(570px / 8);
+  height: calc(570px / 8);
+  cursor: pointer;
 }
 
-/* #letter-container {
-    width: 580px;
-} */
-
 .letter-box {
-    width: calc(580px / 8);
+  width: calc(580px / 8);
 }
 
 .number-box {
-    height: calc(580px / 8);
+  height: calc(580px / 8);
+}
+
+.active-bg {
+  background-color: lime;
 }
