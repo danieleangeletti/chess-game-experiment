@@ -173,12 +173,13 @@ for (let i = 0; i < board.length; i++) {
         active_box = board[j][i];
         active = true;
 
-        const activeBoxHtml = document.getElementById(
+        const active_box_html = document.getElementById(
           `${active_box.x},${active_box.y}`
         );
-        activeBoxHtml.classList.remove("bg-white");
-        activeBoxHtml.classList.remove("bg-dark");
-        activeBoxHtml.classList.add("bg-primary");
+
+        active_box_html.classList.remove("bg-white");
+        active_box_html.classList.remove("bg-dark");
+        active_box_html.classList.add("bg-primary");
 
         console.log("Attivando: ", active_box);
         return;
@@ -193,22 +194,22 @@ for (let i = 0; i < board.length; i++) {
 
         if (valid === true) {
           // MUOVI L'IMMAGINE
-          const activeBoxHtml = document.getElementById(
+          const active_box_html = document.getElementById(
             `${active_box.x},${active_box.y}`
           );
-          activeBoxHtml.classList.remove("bg-primary");
+          active_box_html.classList.remove("bg-primary");
 
           if ((active_box.x + active_box.y) % 2 != 0) {
-            activeBoxHtml.classList.add("bg-dark");
+            active_box_html.classList.add("bg-dark");
           } else {
-            activeBoxHtml.classList.add("bg-white");
+            active_box_html.classList.add("bg-white");
           }
-          const clickedBoxHtml = document.getElementById(
+          const clicked_box_html = document.getElementById(
             `${clicked_box.x},${clicked_box.y}`
           );
 
-          clickedBoxHtml.innerHTML = activeBoxHtml.innerHTML;
-          activeBoxHtml.innerHTML = "";
+          clicked_box_html.innerHTML = active_box_html.innerHTML;
+          active_box_html.innerHTML = "";
 
           console.log("Disattivando: ", clicked_box);
           active = false;
