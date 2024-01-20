@@ -294,12 +294,25 @@ function move(box, destination) {
   switch (box.piece) {
     case "pawn":
       // MOVE PAWN
-      if (destination.x == box.x && destination.y == box.y - 1) {
-        applyMove(box, destination);
+      if (box.player == 0) {
+        if (
+          (destination.x == box.x && destination.y == box.y - 1) ||
+          destination.y == box.y - 2
+        ) {
+          applyMove(box, destination);
 
-        return true;
-      } else {
-        return false;
+          return true;
+        } else {
+          return false;
+        }
+      } else if (box.player == 1) {
+        if (destination.x == box.x && destination.y == box.y + 1) {
+          applyMove(box, destination);
+
+          return true;
+        } else {
+          return false;
+        }
       }
 
     case "rook":
