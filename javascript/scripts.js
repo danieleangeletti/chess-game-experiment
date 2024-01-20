@@ -293,25 +293,47 @@ function move(box, destination) {
   // MUOVE LA CASELLA 'BOX' VERSO LA CASELLA 'DESTINATION'.
   switch (box.piece) {
     case "pawn":
-      // MOVE PAWN
       if (box.player == 0) {
-        if (
-          (destination.x == box.x && destination.y == box.y - 1) ||
-          destination.y == box.y - 2
-        ) {
-          applyMove(box, destination);
+        if (box.y == 6) {
+          if (
+            (destination.x == box.x && destination.y == box.y - 1) ||
+            (destination.x == box.x && destination.y == box.y - 2)
+          ) {
+            applyMove(box, destination);
 
-          return true;
+            return true;
+          } else {
+            return false;
+          }
         } else {
-          return false;
+          if (destination.x == box.x && destination.y == box.y - 1) {
+            applyMove(box, destination);
+
+            return true;
+          } else {
+            return false;
+          }
         }
       } else if (box.player == 1) {
-        if (destination.x == box.x && destination.y == box.y + 1) {
-          applyMove(box, destination);
+        if (box.y == 1) {
+          if (
+            (destination.x == box.x && destination.y == box.y + 1) ||
+            (destination.x == box.x && destination.y == box.y + 2)
+          ) {
+            applyMove(box, destination);
 
-          return true;
+            return true;
+          } else {
+            return false;
+          }
         } else {
-          return false;
+          if (destination.x == box.x && destination.y == box.y + 1) {
+            applyMove(box, destination);
+
+            return true;
+          } else {
+            return false;
+          }
         }
       }
 
