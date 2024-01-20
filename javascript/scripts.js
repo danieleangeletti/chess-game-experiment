@@ -167,9 +167,28 @@ for (let i = 0; i < board.length; i++) {
       clicked_box = board[j][i];
 
       const adesso_ho_cliccato_la_casella_che_voglio_muovere =
-        active == false && clicked_box.player == 0 && turn == 0;
+        active == false && clicked_box.player == 0 && is_even(turn) == true;
 
       if (adesso_ho_cliccato_la_casella_che_voglio_muovere) {
+        active_box = board[j][i];
+        active = true;
+
+        const active_box_html = document.getElementById(
+          `${active_box.x},${active_box.y}`
+        );
+
+        active_box_html.classList.remove("bg-white");
+        active_box_html.classList.remove("bg-dark");
+        active_box_html.classList.add("bg-primary");
+
+        console.log("Attivando: ", active_box);
+        return;
+      }
+
+      const adesso_ho_cliccato_la_casella_che_voglio_muovere_degli_avversari =
+        active == false && clicked_box.player == 1 && is_even(turn) == false;
+
+      if (adesso_ho_cliccato_la_casella_che_voglio_muovere_degli_avversari) {
         active_box = board[j][i];
         active = true;
 
@@ -249,6 +268,7 @@ for (let i = 0; i < board.length; i++) {
           console.log("Disattivando: ", clicked_box);
           active = false;
           active_box = null;
+          turn++;
         } else {
           alert("Invalid move");
         }
@@ -634,4 +654,12 @@ function applyMove(box, destination) {
     piece: "",
     player: -1,
   };
+}
+
+function is_even(n) {
+  if (n == 0 || n % 2 == 0) {
+    return true;
+  } else {
+    return false;
+  }
 }
