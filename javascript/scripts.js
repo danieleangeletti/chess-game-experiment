@@ -181,7 +181,7 @@ for (let i = 0; i < board.length; i++) {
         active_box_html.classList.remove("bg-dark");
         active_box_html.classList.add("bg-primary");
 
-        console.log("Attivando: ", active_box);
+        console.log("Hai cliccato la casella: ", active_box);
         return;
       }
 
@@ -200,7 +200,7 @@ for (let i = 0; i < board.length; i++) {
         active_box_html.classList.remove("bg-dark");
         active_box_html.classList.add("bg-primary");
 
-        console.log("Attivando: ", active_box);
+        console.log("Hai cliccato la casella: ", active_box);
         return;
       }
 
@@ -222,7 +222,7 @@ for (let i = 0; i < board.length; i++) {
           clicked_box.player == active_box.player &&
           clicked_box.piece == active_box.piece
         ) {
-          console.log("Disattivando: ", active_box);
+          console.log("Hai disattivato la casella: ", active_box);
           const my_active_box_html = document.getElementById(
             `${active_box.x},${active_box.y}`
           );
@@ -265,7 +265,7 @@ for (let i = 0; i < board.length; i++) {
           clicked_box_html.innerHTML = active_box_html.innerHTML;
           active_box_html.innerHTML = "";
 
-          console.log("Disattivando: ", clicked_box);
+          console.log("Sei andato sulla casella: ", clicked_box);
           active = false;
           active_box = null;
           turn++;
