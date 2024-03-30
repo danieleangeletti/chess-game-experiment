@@ -1,1 +1,1 @@
-# Bootstrap-template
+Replica of the chess game where two players can challenge each other on the same computer. This project was mainly developed during the Christmas holidays and is nearing completion: currently, what remains to be implemented are the check, checkmate, and pawn capture functionalities.
