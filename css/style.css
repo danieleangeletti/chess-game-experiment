@@ -1,31 +1,125 @@
 body {
+  height: 100vh;
   background-image: url("https://www.psicologiacontemporanea.it/media/filer_public_thumbnails/filer_public/d0/97/d09726dd-e59e-4310-a6b2-01ced4d1158c/scacchi.jpg__4928x3264_q85_crop_subject_location-2464%2C1631_subsampling-2_upscale.jpg");
   background-size: cover;
+  background-repeat: no-repeat;
 }
 
-.big-font {
-  font-size: 3em;
-}
-
-#chess-container {
-  width: 570px;
-  height: 570px;
-}
-
-.square {
-  width: calc(570px / 8);
-  height: calc(570px / 8);
-  cursor: pointer;
-}
-
-.letter-box {
-  width: calc(580px / 8);
-}
-
-.number-box {
-  height: calc(580px / 8);
+.poetsen-one-regular {
+  font-family: "Poetsen One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: #a9a9a9;
 }
 
 .active-bg {
   background-color: lime;
+}
+
+@media (max-width: 575px) {
+  .big-font {
+    font-size: 2em;
+  }
+
+  .symbols {
+    font-size: 0.7em;
+  }
+
+  #chess-container {
+    width: 300px;
+    height: 300px;
+  }
+
+  .square {
+    width: calc(300px / 8);
+    height: calc(300px / 8);
+    cursor: pointer;
+  }
+
+  .letter-box {
+    width: calc(300px / 8);
+  }
+
+  .number-box {
+    height: calc(300px / 8);
+  }
+}
+
+@media (min-width: 576px) {
+  .big-font {
+    font-size: 2.4em;
+  }
+  .symbols {
+    font-size: 0.8em;
+  }
+
+  #chess-container {
+    width: 400px;
+    height: 400px;
+  }
+
+  .square {
+    width: calc(400px / 8);
+    height: calc(400px / 8);
+    cursor: pointer;
+  }
+
+  .letter-box {
+    width: calc(400px / 8);
+  }
+
+  .number-box {
+    height: calc(400px / 8);
+  }
+}
+
+@media (min-width: 768px) {
+  .big-font {
+    font-size: 2.8em;
+  }
+  .symbols {
+    font-size: 0.9em;
+  }
+  #chess-container {
+    width: 480px;
+    height: 480px;
+  }
+
+  .square {
+    width: calc(480px / 8);
+    height: calc(480px / 8);
+    cursor: pointer;
+  }
+
+  .letter-box {
+    width: calc(480px / 8);
+  }
+
+  .number-box {
+    height: calc(480px / 8);
+  }
+}
+
+@media (min-width: 1200px) {
+  .big-font {
+    font-size: 3.2em;
+  }
+  #chess-container {
+    width: 570px;
+    height: 570px;
+  }
+
+  .square {
+    width: calc(570px / 8);
+    height: calc(570px / 8);
+    cursor: pointer;
+  }
+
+  .letter-box {
+    width: calc(570px / 8);
+  }
+
+  .number-box {
+    height: calc(570px / 8);
+  }
 }
