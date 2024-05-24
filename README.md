@@ -1,1 +1,1 @@
-Replica of the chess game where two players can challenge each other on the same computer. This project was mainly developed during the Christmas holidays and is nearing completion: currently, what remains to be implemented are the check, checkmate, and pawn capture functionalities.
+Replica of the chess game where two players can challenge each other on the same computer. This project was mainly developed during the Christmas holidays and is nearing completion. The promotion of the pawn, en passant capture, stalemate, the fifty-move rule, and perpetual check are missing.
